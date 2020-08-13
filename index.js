@@ -142,7 +142,11 @@ function copy(arr, newArr){
     return newArr;
 }
 
-console.log(copy(originalFlavors, "arrayCopy"));
+let copiedArray = copy(originalFlavors, "copiedArray");
+
+console.log(copiedArray);
+
+console.log(copiedArray.length);
 
 
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
@@ -184,12 +188,16 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
-
-    /*code here*/
-
+function getAverageWordLength(arr){
+    let counter = 0;
+    for (let i = 0; i < arr.length; i++) {
+    counter += arr[i].split(" ").length;
+    }
+    counter /= arr.length;
+    return counter
 }
 
+console.log(getAverageWordLength(originalFlavors));
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
 
@@ -272,8 +280,16 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
-
-    /*code here*/
-
+function getRandomFlavors(arr1, arr2, arr3, arr4){
+    let combinedFlavors = [...arr1, ...arr2, ...arr3, ...arr4];
+    let randomFlavors = [];
+    while (randomFlavors.length < 31) {
+        let randomNumber = Math.floor(Math.random() * combinedFlavors.length) + 1;
+        if (randomFlavors.includes(combinedFlavors[randomNumber]) != true) {
+            randomFlavors.push(combinedFlavors[randomNumber]);
+        }
+    }
+    return randomFlavors;
 }
+
+console.log(getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
